@@ -1,7 +1,5 @@
 #!/usr/bin/env python2.7
 
-## IP reference: http://www.networksorcery.com/enp/protocol/ip.htm
-## TCP reference: http://www.networksorcery.com/enp/protocol/tcp.htm
 
 import binascii
 import ctypes
@@ -17,8 +15,7 @@ IF_NAME = "eth0"
 ## Format options structure; filled in when program options are parsed
 formatter = {}
 
-## Model the C interface request structure since Python doesn't expose it to us
-## Found in /usr/include/net/if.h
+
 class ifreq(ctypes.Structure):
 	_fields_ = [
 		## Interface name (i.e. eth0)
@@ -27,8 +24,7 @@ class ifreq(ctypes.Structure):
 		("ifr_flags", ctypes.c_short)
 	]
 
-## Model the C ethernet frame header
-## Found in /usr/include/net/ethernet.h
+
 class ether_header(ctypes.Structure):
 	## How many headers have been created
 	num = 0
@@ -42,7 +38,7 @@ class ether_header(ctypes.Structure):
 		("eth_type", ctypes.c_ushort)
 	]
 
-	## Define some common ethertypes
+	
 	types = {
 		2048: "IPv4",
 		2054: "ARP",
@@ -82,8 +78,7 @@ IP_OFF = lambda b: b & IP_OFFMASK
 IP_DF = lambda b: (b & 0x2)>>1
 IP_MF = lambda b: b & 0x1
 
-## Model the C internet header
-## Found in /usr/include/netinet/ip.h
+
 class ip_header(ctypes.Structure):
 	## How many headers have been created
 	num = 0
