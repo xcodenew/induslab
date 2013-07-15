@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# SPSE 589
 
 from scapy.all import *
 
